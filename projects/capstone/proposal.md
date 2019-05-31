@@ -1,79 +1,98 @@
 # Machine Learning Engineer Nanodegree
+
 ## Capstone Proposal
-Thiago Vieira 
+
+Thiago Vieira
 May 31st, 2019
 
 ## Proposal
 
 ### Domain Background
-_(approx. 1-2 paragraphs)_
 
+The goal of this project it's to build a model for authorship attribution classification using as a background the work developed in [VJO2011](http://www.inf.ufpr.br/lesoliveira/download/ijcnn2011.pdf) e [OOJ2013](http://www.inf.ufpr.br/lesoliveira/download/FSI2013.pdf) that is available in [The Laboratory of Vision, Robotics and Imaging of Federal University of Parana](https://web.inf.ufpr.br/vri/databases/authorship-attribution-database/).
 
-In this section, provide brief details on the background information of the domain from which the project is proposed. Historical information relevant to the project should be included. It should be clear how or why a problem in the domain can or should be solved. Related academic research should be appropriately cited in this section, including why that research is relevant. Additionally, a discussion of your personal motivation for investigating a particular problem in the domain is encouraged but not required.
+The use of electronic documents like e-mails continue to grow exponentially, and even though reliable technology is available to trace a particular computer/or IP address where the document has been produced, the fundamental problem is to identify who was behind the keyboard when the document was produced (OOJ2013). Practical applications for author identification have grown in several different areas such as criminal law (identifying writers of ransom notes and harassment letters), civil law (copyright and estate disputes), and computer security (mining email content).
+
+This problem is very relevant for my work since I'm developing several NLP classification models to label court decisions and the importance of a case to the federal attorney. I intend to apply the knowledge obtain from this project to my work and share it, as well.
 
 ### Problem Statement
-_(approx. 1 paragraph)_
 
-
-
-In this section, clearly describe the problem that is to be solved. The problem described should be well defined and should have at least one relevant potential solution. Additionally, describe the problem thoroughly such that it is clear that the problem is quantifiable (the problem can be expressed in mathematical or logical terms) , measurable (the problem can be measured by some metric and clearly observed), and replicable (the problem can be reproduced and occurs more than once).
+Authorship attribution can be defined as the task of inferring characteristics of a document’s author from the textual characteristics of the document itself. The challenge here is to estimate how similar two documents are from each other, based on patterns of linguistic behavior in documents of known and unknown authorship. This is known in the literature as authorship attribution or authorship analysis.
 
 ### Datasets and Inputs
-_(approx. 2-3 paragraphs)_
 
-The dataset consist of citizens complains registred in the government website [consumidor.gov.br](http://www.consumidor.gov.br) that were scraped and labelled by the ANAC analysts.
+The Authorship Attribution Database (AAD) contains  short articles from 100 different authors whose texts were uniformly distributed over 10 different subjects:
 
-In this section, the dataset(s) and/or input(s) being considered for the project should be thoroughly described, such as how they relate to the problem and why they should be used. Information such as how the dataset or input is (was) obtained, and the characteristics of the dataset or input, should be included with relevant references and citations as necessary It should be clear how the dataset(s) or input(s) will be used in the project and whether their use is appropriate given the context of the problem.
+- Miscellaneous;
+- Law;
+- Economics;
+- Sports;
+- Gastronomy;
+- Literature;
+- Politics;
+- Health;
+- Technology;
+- Tourism;
+
+The sources were 15 Brazilian newspapers located all over the country. We have chosen 30 short articles from each author, thus summing up 3000 pieces of documents. The articles usually deal with polemic subjects and express the author's personal opinion. In average, the articles have 600 tokens (words) and 350 Hapax (words occurring once). One aspect worth of remark is that this kind of articles can go through some revision process, which can remove some personal characteristics of the texts. Besides, authorship attribution using short articles poses an extra challenge since the number of features that can be extracted are directly related to the size of the text.
+
+The dataset can be downloaded in this [link](http://www.inf.ufpr.br/lesoliveira/download/AAD100.rar).
 
 ### Solution Statement
 _(approx. 1 paragraph)_
 
-In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms) , measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
+In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms), measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
 
 ### Benchmark Model
-_(approximately 1-2 paragraphs)_
 
-In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+In the image below, it's shown some works on authorship attribution published in the literature. Comparing different works is not a straightforward task since most of the works use different databases and classifiers.
+
+![results from other works on authorship attribution](https://imgur.com/FckpMAD.png)
+
+For this project, I'll use as a benchmark model the accuracy of the work in [VJO2011](http://www.inf.ufpr.br/lesoliveira/download/ijcnn2011.pdf) e [OOJ2013](http://www.inf.ufpr.br/lesoliveira/download/FSI2013.pdf), which were a 74% and 77%.
+
+Since we have 100 authors in the database, analyzing the confusion matrix would be complicated, these works provided the analysis of the confusion matrix grouped by subject. Such a matrix can show that the recognition rate in terms of subjects is about 86% in [VJO2011](http://www.inf.ufpr.br/lesoliveira/download/ijcnn2011.pdf) and 80% in [OOJ2013](http://www.inf.ufpr.br/lesoliveira/download/FSI2013.pdf).
 
 ### Evaluation Metrics
-_(approx. 1-2 paragraphs)_
 
-Based on the context of NLP and the problem multiclass property I'll use the following metrics to compare models:
+Based on the context of NLP and the multiclass problem property, I'll use the following metrics to compare models:
 
 - Accuracy
-- F1 score (trade off between TP and FP);
+- F1 score (trade-off between TP and FP);
 - F1 score average;
 - Recall;
 - Precision
 - Confusion Matrix.
 
-I would prioritize the recall values, since a `false negative` is worse than a `false positive`. This is because if an accident predicted `injuries` instead of `no injuries`, it would mean that the road should be considered dangerous (which is not a bad final result).
-However, when a result has a `false negative`, it indicated that a potentially dangerous road was not classified as a dangerous one.
-
-In this section, propose at least one evaluation metric that can be used to quantify the performance of both the benchmark model and the solution model. The evaluation metric(s) you propose should be appropriate given the context of the data, the problem statement, and the intended solution. Describe how the evaluation metric(s) are derived and provide an example of their mathematical representations (if applicable). Complex evaluation metrics should be clearly defined and quantifiable (can be expressed in mathematical or logical terms).
+Given the context of the problem and to replicate the same metrics used in the base references, I think this set of metrics is suitable to the problem because it's the most used in the NLP field.
 
 ### Project Design
-_(approx. 1 page)_
 
-The project will be devided as described, based on 
-[cookiecutter-data-science](https://drivendata.github.io/cookiecutter-data-science/):
+The project will be organized based on [cookiecutter-data-science](https://drivendata.github.io/cookiecutter-data-science/):
 
-- A `data` folder containing the csvs files
+- A `data` folder containing the CSV files
 - A `notebooks` folder containing the notebooks on insights and model training
 - A `model` folder containing the final version of the model
 - A `requirements.txt` with software requirements for this project
 
-By the end of the project, I intend to have a model that has a good accuracy
-on predicting the class of a citizen complain over a airline company.
+The methodology consists of a classic NLP classification pipeline:
 
-In this final section, summarize a theoretical workflow for approaching a solution given the problem. Provide thorough discussion for what strategies you may consider employing, what analysis of the data might be required before being used, or which algorithms will be considered for your implementation. The workflow and discussion that you provide should align with the qualities of the previous sections. Additionally, you are encouraged to include small visualizations, pseudocode, or diagrams to aid in describing the project design, but it is not required. The discussion should clearly outline your intended workflow of the capstone project.
+- Text Exploratory Data Analysis (EDA);
+- Text Preprocessing (Stopwords/Unnecessary tokens removal, Stemming, Lemmatization, etc...) + Features Extraction (BoW, TF-IDF, Hashing, Embeddings, etc...);
+- Run some classic methods (Logistic Regression, Naive Bayes, KNN, etc...);
+- Run some more advanced methods (Word2Vec, Doc2Vec, BERT, etc...);
+- Evaluate the models against the benchmark;
+- Discuss the results.
 
------------
+It's essential to notice that maybe not all algorithms described above are going to be tested, as I the goal of this project is not to test all of them.
 
-**Before submitting your proposal, ask yourself. . .**
+Initially, I'll use the following Python libraries:
 
-- Does the proposal you have written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Solution Statement** and **Project Design**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your proposal?
-- Have you properly proofread your proposal to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
+- Jupyter Notebook;
+- Scikit Learn;
+- NLTK;
+- Spacy;
+- pandas;
+- Gensim;
+- Google Colab;
+- also, others that may be necessary.
