@@ -39,9 +39,8 @@ The sources were 15 Brazilian newspapers located all over the country. We have c
 The dataset can be downloaded in this [link](http://www.inf.ufpr.br/lesoliveira/download/AAD100.rar).
 
 ### Solution Statement
-_(approx. 1 paragraph)_
 
-In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms), measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
+The solutions for this problem will be based on several supervised learning methods and by testing different approaches for feature extractions/representation. The best solution will be the one that has the best score on selected metrics. It's going to be an experimentation analysis to find the best solution. Since the work that this project is based is before the boom of CNN and RNN, I hope to get some interesting results.
 
 ### Benchmark Model
 
@@ -78,9 +77,9 @@ The project will be organized based on [cookiecutter-data-science](https://drive
 The methodology consists of a classic NLP classification pipeline:
 
 - Text Exploratory Data Analysis (EDA);
-- Text Preprocessing (Stopwords/Unnecessary tokens removal, Stemming, Lemmatization, etc...) + Features Extraction (BoW, TF-IDF, Hashing, Embeddings, etc...);
-- Run some classic methods (Logistic Regression, Naive Bayes, KNN, etc...);
-- Run some more advanced methods (Word2Vec, Doc2Vec, BERT, etc...);
+- Text Preprocessing (Stopwords/Unnecessary tokens removal, Stemming, Lemmatization, etc...) + Features Extraction (BoW, TF-IDF, Hashing, Embeddings, etc);
+- Run some classic methods (Logistic Regression, Naive Bayes, KNN, etc);
+- Run some more advanced methods (Word2Vec, Doc2Vec, CNN, RNN, etc.)
 - Evaluate the models against the benchmark;
 - Discuss the results.
 
